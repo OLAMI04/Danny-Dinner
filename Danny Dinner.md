@@ -1,11 +1,11 @@
 
-
+````sql
 CREATE TABLE sales (
   "customer_id" VARCHAR(1),
   "order_date" DATE,
   "product_id" INTEGER
 );
-
+````
 INSERT INTO sales
   ("customer_id", "order_date", "product_id")
 VALUES
