@@ -6,6 +6,7 @@ CREATE TABLE sales (
   "product_id" INTEGER
 );
 ````
+````sql
 INSERT INTO sales
   ("customer_id", "order_date", "product_id")
 VALUES
@@ -24,53 +25,57 @@ VALUES
   ('C', '2021-01-01', '3'),
   ('C', '2021-01-01', '3'),
   ('C', '2021-01-07', '3');
- 
-
+ ````
+````sql
 CREATE TABLE menu (
   "product_id" INTEGER,
   "product_name" VARCHAR(5),
   "price" INTEGER
 );
-
+````
+````sql
 INSERT INTO menu
   ("product_id", "product_name", "price")
 VALUES
   ('1', 'sushi', '10'),
   ('2', 'curry', '15'),
   ('3', 'ramen', '12');
-  
-
+  ````
+````sql
 CREATE TABLE members (
   "customer_id" VARCHAR(1),
   "join_date" DATE
 );
-
+````
+````sql
 INSERT INTO members
   ("customer_id", "join_date")
 VALUES
   ('A', '2021-01-07'),
   ('B', '2021-01-09');
-
-
+````
+````sql
   SELECT *
   FROM Sales
-
-  --
+````
+````sql
   SELECT *
   FROM Menu
-
-  --
+````
+  ````sql
   SELECT *
   FROM Members
-  --
+  ````
   --1.	What is the total amount each customer spent at the restaurant?
+  ````sql
   Select S.customer_id, 
   SUM (price) as TotalAmount
   From menu As M 
   JOIN sales 
   AS S On M.product_id=S.product_id
   Group by S.customer_id;
-
+````
+````sql
   --2. How many days has each customer visited the restaurant?
   Select
   Distinct
@@ -80,9 +85,9 @@ VALUES
   From sales
   Group by 
   customer_id;
-
+````
   --3.What was the first item from the menu purchased by each customer?
-
+````sql
  SELECT 
  DISTINCT
  customer_id,
@@ -99,9 +104,9 @@ m.product_name,
  ON s.product_id = m.product_id
  ) a
  WHERE dense_rnk = 1
-
-
+````
 	--4.	What is the most purchased item on the menu and how many times was it purchased by all customers?
+ ````sql
 Select 
 Distinct
 Customer_id, 
@@ -114,9 +119,9 @@ M.product_id,
 Order by M.product_id DESC) Densrank From [dbo].[menu] M 
 Join [dbo].[sales] S ON S.product_id = M.product_id) Densrank
  Where Densrank= 1;
-
-
+````
  --5.Which item was the most popular for each customer?
+ ````sql
  Select
 	Distinct
 	Customer_id,
@@ -134,7 +139,8 @@ ON
 	S.product_id = M.product_id) Densrank
 Where
 	Densrank= 1;
-
+````
+````sql
  --6.	Which item was purchased first by the customer after they became a member?
  select 
 	Top 1
@@ -157,9 +163,9 @@ JOIN [dbo].[menu] MU
 ON
 S.product_id = mu.product_id
 Order by FT.customer_id;
-
+````
   --7.Which item was purchased just before the customer became a member?
-
+````sql
   Select 
 	Top 1
 	S.customer_id,
@@ -181,9 +187,9 @@ JOIN [dbo].[menu] MU
 ON
 S.product_id = mu.product_id
 Order by FT.customer_id;
-
-
+````
 ---8.What is the total items and amount spent for each member before they became a member?
+````sql
  SELECT
  S.customer_id,
  COUNT(S.product_id) AS totalitems,
@@ -196,9 +202,10 @@ Order by FT.customer_id;
  WHERE S.order_date < MB.join_date
  GROUP BY 
 	S.customer_id;
-
+````
 
 --9.If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+````sql
 SELECT
 S.customer_id,
 	SUM(CASE 
@@ -212,9 +219,10 @@ JOIN
 ON s.product_id=m.product_id
 GROUP BY
 	S.customer_id;
-
+````
 
 --10.In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+````sql
 SELECT
 S.customer_id,
 SUM(CASE
@@ -231,7 +239,7 @@ JOIN Members MB
  WHERE S.order_date < MB.join_date
  GROUP BY 
  S.customer_id;
-
+````
 
 
  
