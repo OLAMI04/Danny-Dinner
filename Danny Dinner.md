@@ -75,6 +75,8 @@ VALUES
   AS S On M.product_id=S.product_id
   Group by S.customer_id;
 ````
+![image](https://github.com/user-attachments/assets/e111f017-3117-411d-892a-82592619f0d1)
+
 ````sql
   --2. How many days has each customer visited the restaurant?
   Select
@@ -86,6 +88,8 @@ VALUES
   Group by 
   customer_id;
 ````
+![image](https://github.com/user-attachments/assets/8905711b-b153-4328-81b3-886ffc60d9c5)
+
   --3.What was the first item from the menu purchased by each customer?
 ````sql
  SELECT 
@@ -105,7 +109,9 @@ m.product_name,
  ) a
  WHERE dense_rnk = 1
 ````
-	--4.	What is the most purchased item on the menu and how many times was it purchased by all customers?
+![image](https://github.com/user-attachments/assets/ab7e7f05-8456-491b-a4e3-bc2aba1a0a9b)
+
+--4.	What is the most purchased item on the menu and how many times was it purchased by all customers?
  ````sql
 Select 
 Distinct
@@ -120,6 +126,8 @@ Order by M.product_id DESC) Densrank From [dbo].[menu] M
 Join [dbo].[sales] S ON S.product_id = M.product_id) Densrank
  Where Densrank= 1;
 ````
+![image](https://github.com/user-attachments/assets/0dc727f1-e3cf-4b70-8a50-2ffb71923013)
+
  --5.Which item was the most popular for each customer?
  ````sql
  Select
@@ -140,6 +148,8 @@ ON
 Where
 	Densrank= 1;
 ````
+![image](https://github.com/user-attachments/assets/7c2b0790-07e1-4014-b361-126bbaa90400)
+
 ````sql
  --6.	Which item was purchased first by the customer after they became a member?
  select 
@@ -164,6 +174,8 @@ ON
 S.product_id = mu.product_id
 Order by FT.customer_id;
 ````
+![image](https://github.com/user-attachments/assets/80eb4e40-d90f-422e-97bb-d47d339b7fc6)
+
   --7.Which item was purchased just before the customer became a member?
 ````sql
   Select 
@@ -188,6 +200,8 @@ ON
 S.product_id = mu.product_id
 Order by FT.customer_id;
 ````
+![image](https://github.com/user-attachments/assets/f0b61e37-ac3d-4a24-9ea0-c3a1e01285dd)
+
 ---8.What is the total items and amount spent for each member before they became a member?
 ````sql
  SELECT
@@ -203,6 +217,7 @@ Order by FT.customer_id;
  GROUP BY 
 	S.customer_id;
 ````
+![image](https://github.com/user-attachments/assets/57280d46-0ca8-4dc0-8e2a-83af5db0f5ff)
 
 --9.If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 ````sql
@@ -220,6 +235,7 @@ ON s.product_id=m.product_id
 GROUP BY
 	S.customer_id;
 ````
+![image](https://github.com/user-attachments/assets/d96b7b24-aac1-4021-b256-b60dbfb3b8cc)
 
 --10.In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 ````sql
@@ -240,6 +256,7 @@ JOIN Members MB
  GROUP BY 
  S.customer_id;
 ````
+![image](https://github.com/user-attachments/assets/ce6bb9fb-e479-43f2-801a-7ebfdd799464)
 
 
  
